@@ -22,7 +22,7 @@
 
 ## 网络请求
 
-1. npm 引入 fly.js，/build/webpack.base.conf.js 配置别名，具体使用方法参考 [fly.js]
+1. npm 引入 fly.js，设置 /build/webpack.base.conf.js 别名，具体使用方法参考 [fly.js]
 
         alias: {
             'vue': 'mpvue',
@@ -40,7 +40,15 @@
 
 1. npm 引入 dayjs，使用方法参考 [dayjs]
 
+## 表单验证 demo
+
+1. 参考拓展组件 mp-form
+
+## 日历组件 [mpvue-calendar]
+
+1. 引入
 
 [weui]:https://github.com/wechat-miniprogram/weui-miniprogram
 [fly.js]:https://github.com/wendux/fly
 [dayjs]:https://github.com/iamkun/dayjs
+[mpvue-calendar]:https://github.com/Hzy0913/mpvue-calendar

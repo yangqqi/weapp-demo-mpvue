@@ -1,2 +1,6 @@
 build/*.js
 config/*.js
+static/*
+
+desc-config/index.js
+src/plugins/wxapp_rsa.js
