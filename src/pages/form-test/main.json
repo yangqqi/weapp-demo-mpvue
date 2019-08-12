@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "表单测试",
+  "usingComponents": {
+    "mp-cell": "/static/weui/cell/cell",
+    "mp-cells": "/static/weui/cells/cells",
+    "mp-checkbox-group": "/static/weui/checkbox-group/checkbox-group",
+    "mp-checkbox": "/static/weui/checkbox/checkbox",
+    "mp-form": "/static/weui/form/form",
+    "mp-toptips": "/static/weui/toptips/toptips"
+  }
+}
