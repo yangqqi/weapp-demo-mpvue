@@ -5,7 +5,7 @@
 ## 引入扩展组件库 [weui][weui]
 
 1. 引入样式表 `@/plugins/style/weui.wxss`
-2. 引入组件到 `/static/weiui`
+2. 引入组件到 `/static/weui`
 3. 使用方法参考 [腾讯小程序开放文档](https://developers.weixin.qq.com/miniprogram/dev/extended/weui/quickstart.html)
 
 ## 状态与缓存
