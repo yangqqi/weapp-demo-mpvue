@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 
-import './style/comm.less'
-import './style/weui.wxss'
+import '@style/comm.less'
+import '@style/weui.wxss'
 
 import store from './store.js'
 import storage from './plugins/storage.js'

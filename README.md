@@ -46,6 +46,10 @@
 
 ## 日历组件 [mpvue-calendar]
 
+## 使用 less
+
+                npm install less less-loader
+
 [weui]:https://github.com/wechat-miniprogram/weui-miniprogram
 [fly.js]:https://github.com/wendux/fly
 [dayjs]:https://github.com/iamkun/dayjs

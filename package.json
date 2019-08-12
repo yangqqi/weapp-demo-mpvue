@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "dayjs": "^1.8.15",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
     "mpvue": "^2.0.0",
     "underscore": "^1.9.1",
     "vuex": "^3.0.1"
