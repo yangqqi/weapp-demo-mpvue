@@ -4,24 +4,12 @@
       <mp-form id="form" :rules="rules" v-models="formData">
         <mp-cells title="单选列表项">
           <mp-checkbox-group prop="radio" :multi="false" @change="radioChange">
-            <mp-checkbox
-              v-for="item in radioItems"
-              :key="item.value"
-              :label="item.name"
-              :value="item.value"
-              :checked="item.checked"
-            ></mp-checkbox>
+            <mp-checkbox v-for="item in radioItems" :key="item.value" :label="item.name" :value="item.value" :checked="item.checked"></mp-checkbox>
           </mp-checkbox-group>
         </mp-cells>
         <mp-cells title="复选列表项">
           <mp-checkbox-group prop="checkbox" :multi="true" @change="checkboxChange">
-            <mp-checkbox
-              v-for="item in checkboxItems"
-              :key="item.value"
-              :label="item.name"
-              :value="item.value"
-              :checked="item.checked"
-            ></mp-checkbox>
+            <mp-checkbox v-for="item in checkboxItems" :key="item.value" :label="item.name" :value="item.value" :checked="item.checked"></mp-checkbox>
           </mp-checkbox-group>
         </mp-cells>
 
@@ -40,12 +28,7 @@
           </mp-cell>
           <mp-cell prop="vcode" title="验证码" ext-class="weui-cell_vcode">
             <input v-model="formData.vcode" class="weui-input" placeholder="请输入验证码" />
-            <image
-              slot="footer"
-              class="weui-vcode-img"
-              src="../images/vcode.jpg"
-              style="width: 108px"
-            />
+            <image slot="footer" class="weui-vcode-img" src="../images/vcode.jpg" style="width: 108px" />
           </mp-cell>
         </mp-cells>
         <mp-cells title="提交后表单项报错">
@@ -70,10 +53,7 @@ export default {
       showTopTips: false,
       error: '',
 
-      radioItems: [
-        { name: 'cell standard', value: '0', checked: true },
-        { name: 'cell standard', value: '1' }
-      ],
+      radioItems: [{ name: 'cell standard', value: '0', checked: true }, { name: 'cell standard', value: '1' }],
       checkboxItems: [
         { name: 'standard is dealt for u.', value: '0', checked: true },
         { name: 'standard is dealicient for u.', value: '1' }
@@ -97,10 +77,7 @@ export default {
         {
           // 多个规则
           name: 'mobile',
-          rules: [
-            { required: true, message: 'mobile必填' },
-            { mobile: true, message: 'mobile格式不对' }
-          ]
+          rules: [{ required: true, message: 'mobile必填' }, { mobile: true, message: 'mobile格式不对' }]
         },
         {
           name: 'vcode',

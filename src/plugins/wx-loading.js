@@ -1,10 +1,10 @@
 let needLoadingRequestCount = 0
 
-function startLoading() {
+function startLoading () {
   wx.showNavigationBarLoading() // 标题栏加载动画
 }
 
-function endLoading() {
+function endLoading () {
   wx.hideNavigationBarLoading() // 标题栏加载动画
   wx.stopPullDownRefresh() // 下拉加载动画
   wx.hideLoading() // 提示框加载动画
@@ -16,14 +16,14 @@ const tryCloseLoading = () => {
   }
 }
 
-export function showFullScreenLoading() {
+export function showFullScreenLoading () {
   if (needLoadingRequestCount === 0) {
     startLoading()
   }
   needLoadingRequestCount++
 }
 
-export function tryHideFullScreenLoading() {
+export function tryHideFullScreenLoading () {
   if (needLoadingRequestCount <= 0) return
   needLoadingRequestCount--
   if (needLoadingRequestCount === 0) {
@@ -32,9 +32,9 @@ export function tryHideFullScreenLoading() {
 }
 
 // 防抖
-function _debounce(fn, interval = 300) {
+function _debounce (fn, interval = 300) {
   let timeout = null
-  return function() {
+  return function () {
     clearTimeout(timeout)
     timeout = setTimeout(() => {
       fn.apply(this, arguments)
