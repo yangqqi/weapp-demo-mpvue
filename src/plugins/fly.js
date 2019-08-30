@@ -16,22 +16,18 @@ Service.config.headers = {
 
 // 防抖
 let reqTimer = null
-function _debounce(fn, delay = 300, param) {
+function _debounce(fn, param) {
   // 取消之前的延时调用
   clearTimeout(reqTimer)
   reqTimer = setTimeout(() => {
     fn(param)
-  }, delay)
+  }, 300)
 }
-
-// 打印错误
 function showErrTip(tip) {
-  console.log(1)
   wx.showModal({
     title: '提示',
     content: tip,
-    showCancel: false,
-    complete(res) {}
+    showCancel: false
   })
 }
 
@@ -51,7 +47,7 @@ Service.interceptors.request.use(
   error => {
     console.error(error)
     let tip = error.message ? error.message : '网络请求失败'
-    _debounce(showErrTip, 300, tip)
+    _debounce(showErrTip, tip)
     return Promise.reject(error)
   }
 )
@@ -71,10 +67,10 @@ Service.interceptors.response.use(
         // 请求成功，授权失效
         // token 失效；清空 token，返回登录页
         storage.removeAuthData()
-        _debounce(showErrTip, 300, res.msg)
+        _debounce(showErrTip, res.msg)
       } else {
         // 请求成功，响应失败
-        _debounce(showErrTip, 300, res.toString())
+        _debounce(showErrTip, res.msg)
       }
     }
 
@@ -88,10 +84,10 @@ Service.interceptors.response.use(
     if (error.status === 401) {
       // token 失效；清空 token，返回登录页
       storage.removeAuthData()
-      _debounce(showErrTip, 300, '登录失效')
+      _debounce(showErrTip, '登录失效')
     } else {
       let tip = error.response.data.message ? error.response.data.message : '网络请求错误'
-      _debounce(showErrTip, 300, tip)
+      _debounce(showErrTip, tip)
     }
     return error
   }
