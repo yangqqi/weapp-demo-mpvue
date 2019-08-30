@@ -1,8 +1,8 @@
 import { showFullScreenLoading, tryHideFullScreenLoading } from './wx-loading.js'
 import storage from './storage.js'
 import Fly from 'flyio'
-const Service = new Fly()
 
+const Service = new Fly()
 const dvscConfig = require('../../desc-config/index.js')
 
 // token 失效
@@ -12,6 +12,27 @@ const ERROR_CODE = ['50001', '50002', '50003', '50004', '50009']
 Service.config.baseURL = dvscConfig.apiUrl ? dvscConfig.apiUrl : 'requestUrl'
 Service.config.headers = {
   'Content-Type': 'application/json;charset=UTF-8'
+}
+
+// 防抖
+let reqTimer = null
+function _debounce(fn, delay = 300, param) {
+  // 取消之前的延时调用
+  clearTimeout(reqTimer)
+  reqTimer = setTimeout(() => {
+    fn(param)
+  }, delay)
+}
+
+// 打印错误
+function showErrTip(tip) {
+  console.log(1)
+  wx.showModal({
+    title: '提示',
+    content: tip,
+    showCancel: false,
+    complete(res) {}
+  })
 }
 
 // 添加请求拦截器
@@ -28,11 +49,9 @@ Service.interceptors.request.use(
     return request
   },
   error => {
-    wx.showToast({
-      title: error.message ? error.message : '网络请求失败',
-      icon: 'none',
-      duration: 2000
-    })
+    console.error(error)
+    let tip = error.message ? error.message : '网络请求失败'
+    _debounce(showErrTip, 300, tip)
     return Promise.reject(error)
   }
 )
@@ -45,23 +64,17 @@ Service.interceptors.response.use(
     }
 
     if (response.status === 200 && response.data.code !== 0) {
-      // 请求成功，授权失效
       let res = response.data
+      console.error(res)
+
       if (res.errorCode && ERROR_CODE.indexOf(res.errorCode) >= 0) {
+        // 请求成功，授权失效
         // token 失效；清空 token，返回登录页
         storage.removeAuthData()
-        wx.navigateTo({ url: '/pages/index/main' })
-        wx.showToast({
-          title: res.msg,
-          icon: 'none',
-          duration: 2000
-        })
+        _debounce(showErrTip, 300, res.msg)
       } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none',
-          duration: 2000
-        })
+        // 请求成功，响应失败
+        _debounce(showErrTip, 300, res.toString())
       }
     }
 
@@ -70,22 +83,15 @@ Service.interceptors.response.use(
   error => {
     tryHideFullScreenLoading()
 
+    // 请求失败
+    console.error(error)
     if (error.status === 401) {
-      // 请求失败
       // token 失效；清空 token，返回登录页
       storage.removeAuthData()
-      wx.navigateTo({ url: '/pages/index/main' })
-      wx.showToast({
-        title: '登录失效',
-        icon: 'none',
-        duration: 2000
-      })
+      _debounce(showErrTip, 300, '登录失效')
     } else {
-      wx.showToast({
-        title: error.message ? error.message : '网络请求错误',
-        icon: 'none',
-        duration: 2000
-      })
+      let tip = error.response.data.message ? error.response.data.message : '网络请求错误'
+      _debounce(showErrTip, 300, tip)
     }
     return error
   }

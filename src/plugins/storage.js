@@ -1,14 +1,14 @@
 // @storage
 
 // key
-export function getPublicKey () {
+export function getPublicKey() {
   return '公钥'
 }
 
 const TokenKey = 'Authorization' // 用户 token
 
 // 登录保存授权 token
-const keepAuthData = function (token) {
+const keepAuthData = function(token) {
   try {
     wx.setStorageSync(TokenKey, token)
   } catch (e) {
@@ -16,21 +16,8 @@ const keepAuthData = function (token) {
   }
 }
 
-// 读取授权 token
-const getToken = function () {
-  try {
-    var value = wx.getStorageSync(TokenKey)
-    if (value) {
-      // Do something with return value
-      return value
-    }
-  } catch (e) {
-    // Do something when catch error
-  }
-}
-
 // 退出登录，清除缓存
-const removeAuthData = function () {
+const removeAuthData = function() {
   try {
     wx.removeStorageSync(TokenKey)
   } catch (e) {
@@ -41,6 +28,19 @@ const removeAuthData = function () {
   //   } catch (e) {
   //     // Do something when catch error
   //   }
+}
+
+// 读取授权 token
+const getToken = function() {
+  try {
+    var value = wx.getStorageSync(TokenKey)
+    if (value) {
+      // Do something with return value
+      return value
+    }
+  } catch (e) {
+    // Do something when catch error
+  }
 }
 
 export default {

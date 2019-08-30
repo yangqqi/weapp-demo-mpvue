@@ -1,13 +1,13 @@
 let needLoadingRequestCount = 0
 
 function startLoading () {
-  wx.showNavigationBarLoading() // 标题栏加载动画
+  mpvue.showNavigationBarLoading() // 标题栏加载动画
 }
 
 function endLoading () {
-  wx.hideNavigationBarLoading() // 标题栏加载动画
-  wx.stopPullDownRefresh() // 下拉加载动画
-  wx.hideLoading() // 提示框加载动画
+  mpvue.hideNavigationBarLoading() // 标题栏加载动画
+  mpvue.stopPullDownRefresh() // 下拉加载动画
+  mpvue.hideLoading() // 提示框加载动画
 }
 
 const tryCloseLoading = () => {
@@ -32,8 +32,8 @@ export function tryHideFullScreenLoading () {
 }
 
 // 防抖
+let timeout = null
 function _debounce (fn, interval = 300) {
-  let timeout = null
   return function () {
     clearTimeout(timeout)
     timeout = setTimeout(() => {
